@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="core-list" />
+    <meta charset=utf-8 />
+    <title>Polymer</title>
+    <script src="http://www.polymer-project.org/webcomponents.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/Faker/0.7.2/MinFaker.js"></script>
+    <link rel="import" href="http://www.polymer-project.org/components/polymer/polymer.html">
+    <link rel="import" href="http://www.polymer-project.org/components/core-list/core-list.html">
+    <style>
+      list-test {
+        display: block;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body fit>
+
+    <list-test></list-test>
+
+    <polymer-element name="list-test" layout vertical>
+      <template>
+        <style>
+          .item {
+            box-sizing: border-box;
+            height: 30px;
+            border-bottom: 1px solid #ddd;
+            padding: 4px;
+            cursor: default;
+            background-color: LemonChiffon;
+            overflow: hidden;
+            color: Purple;
+          }
+        </style>
+
+        <core-list id="list" data="{{data}}" height="80" flex>
+          <template>
+            <div class="item">
+              <span>{{model.name}}</span>
+            </div>
+          </template>
+        </core-list>
+
+      </template>
+      <script>
+        Polymer({
+          ready: function() {
+            this.data = this.generateData();
+          },
+          generateData: function() {
+            var data = [];
+            for (var i = 0; i < 300; i++) {
+              data.push({ name: Faker.Name.findName() });
+            }
+            
+            return data;
+          }
+        });
+      </script>
+    </polymer-element>
+
+  </body>
+</html>

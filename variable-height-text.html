@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="core-list with swipeable-card" />
+    <meta charset=utf-8 />
+    <title>Polymer</title>
+    <script src="http://www.polymer-project.org/webcomponents.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Faker/0.7.2/MinFaker.js"></script>
+    <link rel="import" href="http://www.polymer-project.org/components/polymer/polymer.html">
+    <link rel="import" href="http://www.polymer-project.org/components/core-list/core-list.html">
+  </head>
+  <body fullbleed layout vertical>
+
+    <list-test flex></list-test>
+
+    <polymer-element name="list-test" layout vertical>
+      <template>
+        <style>
+          :host {
+            display: block;
+          }
+          .item {
+            height: 30px;
+            background-color: lemonchiffon;
+          }
+          .item:nth-of-type(2n) {
+            height: 50px;
+            background-color: lavender;
+          }
+        </style>
+
+        <core-list id="list" data="{{data}}" height="80" flex>
+          <template>
+            <span class="item" style="font-size:{{model.height}};height:{{model.height}}">
+              {{model.name}}
+            </span>
+          </template>
+        </core-list>
+
+      </template>
+      <script>
+        Polymer({
+          ready: function() {
+            this.data = [];
+            for (var i = 0; i < 100; i++) {
+              this.data.push({ name: Faker.Name.findName(), height: parseInt((i+1)*2)+'px' });
+            }
+          }
+        });
+      </script>
+    </polymer-element>
+  </body>
+</html>

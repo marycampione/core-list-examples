@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="core-list variable height images" />
+    <meta charset=utf-8 />
+    <title>Polymer</title>
+    <script src="http://www.polymer-project.org/platform.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Faker/0.7.2/MinFaker.js"></script>
+    <link rel="import" href="http://www.polymer-project.org/components/polymer/polymer.html">
+    <link rel="import" href="http://www.polymer-project.org/components/core-list/core-list.html">
+  </head>
+  <body fullbleed layout vertical>
+
+    <list-test flex></list-test>
+
+    <polymer-element name="list-test" layout vertical>
+      <template>
+        <style>
+          :host {
+            display: block;
+          }
+        </style>
+
+        <core-list id="list" data="{{data}}" flex>
+          <template>
+            <div class="item">
+              <img src="{{model.image.src}}"
+                   width="{{model.image.width}}"
+                   height="{{model.image.height}}">
+            </div>
+          </template>
+        </core-list>
+
+      </template>
+      <script>
+        Polymer({
+          ready: function() {
+            this.data = [];
+
+            for (var i = 0; i < 100; i++) {
+              this.data.push({
+                image: this.randomImg()
+              });
+            }
+          },
+          randomImg: function() {
+            var width = '350';
+            var height = Math.ceil(Math.random() * (360 - 200) + 200);
+
+            return {
+              src: 'http://lorempixel.com/' + width + '/' + height,
+              width: width,
+              height: height
+            }
+          }
+        });
+      </script>
+    </polymer-element>
+
+  </body>
+</html>
